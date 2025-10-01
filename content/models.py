@@ -37,11 +37,14 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+from learning.models import Lesson
+
 class Post(models.Model):
     campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
     platform = models.ForeignKey(Platform, on_delete=models.CASCADE)
     post_type = models.ForeignKey(PostType, on_delete=models.CASCADE)
     status = models.ForeignKey(PostStatus, on_delete=models.CASCADE)
+    lesson = models.ForeignKey(Lesson, on_delete=models.SET_NULL, null=True, blank=True, related_name='posts')
     title = models.CharField(max_length=255)
     body = models.TextField()
     scheduled_at = models.DateTimeField(null=True, blank=True)
