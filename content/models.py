@@ -38,8 +38,10 @@ class Tag(models.Model):
         return self.name
 
 from learning.models import Lesson
+from github.models import ChangeItem
 
 class Post(models.Model):
+    change_item = models.ForeignKey(ChangeItem, on_delete=models.SET_NULL, null=True, blank=True, related_name='posts')
     campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
     platform = models.ForeignKey(Platform, on_delete=models.CASCADE)
     post_type = models.ForeignKey(PostType, on_delete=models.CASCADE)
