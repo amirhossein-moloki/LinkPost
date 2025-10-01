@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "content",
     "learning",
     "github",
+    "search",
 ]
 
 MIDDLEWARE = [
