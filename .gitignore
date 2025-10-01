@@ -1,20 +1,16 @@
-# Byte-compiled / optimized / DLL files
+# Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 
-# Django stuff
-*.log
+# Django
 db.sqlite3
-db.sqlite3-journal
+*.log
 
-# Environment
-.env
-venv/
-env/
+# Temporary files
+jules-scratch/
 
-# Build artifacts
-/dist/
-/build/
-*.egg-info/
+# IDE
+.idea/
+.vscode/
