@@ -35,13 +35,13 @@ import { ChevronDown } from "lucide-react"
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
-  deleteCampaign: (id: number) => void; // Explicitly pass the delete handler
+  onDelete?: (row: TData) => void
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
-  deleteCampaign,
+  onDelete,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
@@ -59,9 +59,8 @@ export function DataTable<TData, TValue>({
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
-    // Pass the delete function to the table meta
     meta: {
-      deleteCampaign,
+      onDelete,
     },
     state: {
       sorting,
@@ -75,7 +74,7 @@ export function DataTable<TData, TValue>({
     <div className="w-full">
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter by campaign name..."
+          placeholder="Filter by tag name..."
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("name")?.setFilterValue(event.target.value)
