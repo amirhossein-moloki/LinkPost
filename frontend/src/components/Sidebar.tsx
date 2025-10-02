@@ -6,8 +6,8 @@ const Sidebar = () => {
     {
       name: 'Content',
       subItems: [
-        { name: 'Posts', href: '/content' },
         { name: 'Campaigns', href: '/content/campaigns' },
+        { name: 'Posts', href: '/content/posts' },
         { name: 'Platforms', href: '/content/platforms' },
         { name: 'Tags', href: '/content/tags' },
       ],

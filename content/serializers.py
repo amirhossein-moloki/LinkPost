@@ -58,6 +58,15 @@ class AutomationLogSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class PostSerializer(serializers.ModelSerializer):
+    campaign_name = serializers.CharField(source='campaign.name', read_only=True)
+    platform_name = serializers.CharField(source='platform.name', read_only=True)
+    status_name = serializers.CharField(source='status.name', read_only=True)
+
     class Meta:
         model = Post
-        fields = '__all__'
+        fields = [
+            'id', 'change_item', 'campaign', 'platform', 'post_type', 'status',
+            'lesson', 'title', 'body', 'scheduled_at', 'published_at',
+            'created_at', 'updated_at', 'tags', 'campaign_name', 'platform_name',
+            'status_name'
+        ]
