@@ -4,13 +4,19 @@ __pycache__/
 *.pyo
 *.pyd
 
+# Virtualenv
+venv/
+*.env
+
 # Django
-db.sqlite3
 *.log
+db.sqlite3
 
-# Temporary files
-jules-scratch/
+# Frontend
+frontend/node_modules/
+frontend/.next/
+frontend/out/
 
-# IDE
+# IDE files
 .idea/
 .vscode/
