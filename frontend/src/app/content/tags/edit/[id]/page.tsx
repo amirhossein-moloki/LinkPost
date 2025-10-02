@@ -19,7 +19,8 @@ const EditTagPage = () => {
       const fetchTag = async () => {
         try {
           const response = await axios.get(`/api/content/tags/${id}/`);
-          setName(response.data.name);
+          const tag = response.data;
+          setName(tag.name);
         } catch (err) {
           setError('Failed to fetch tag data.');
           console.error(err);
