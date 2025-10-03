@@ -5,6 +5,7 @@ class TopicSerializer(serializers.ModelSerializer):
     class Meta:
         model = Topic
         fields = '__all__'
+        ref_name = "LearningTopic"
 
 class ChapterSerializer(serializers.ModelSerializer):
     class Meta:
