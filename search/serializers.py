@@ -9,6 +9,7 @@ class TopicSerializer(serializers.ModelSerializer):
     class Meta:
         model = Topic
         fields = '__all__'
+        ref_name = "SearchTopic"
 
 
 class TopicQuerySerializer(serializers.ModelSerializer):
