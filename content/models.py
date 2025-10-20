@@ -37,8 +37,28 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
-from learning.models import Lesson
+from learning.models import Chapter, Lesson
 from github.models import ChangeItem
+
+class DraftBatch(models.Model):
+    STATUS_CHOICES = (
+        ('drafted', 'Drafted'),
+        ('revised', 'Revised'),
+        ('approved', 'Approved'),
+        ('error', 'Error'),
+    )
+
+    token = models.CharField(max_length=255, unique=True)
+    posts = models.JSONField()
+    chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE, related_name='draft_batches')
+    lessons = models.ManyToManyField(Lesson, related_name='draft_batches')
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='drafted')
+    feedback = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.token
 
 class Post(models.Model):
     change_item = models.ForeignKey(ChangeItem, on_delete=models.SET_NULL, null=True, blank=True, related_name='posts')
@@ -87,7 +107,8 @@ class Comment(models.Model):
         return f"Comment by {self.author.username} on {self.post.title}"
 
 class AutomationLog(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='logs')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='logs', null=True, blank=True)
+    token = models.CharField(max_length=255, null=True, blank=True, help_text="Token for DraftBatch if post is not created yet")
     ACTION_CHOICES = (
         ('publish', 'Publish'),
         ('retry', 'Retry'),
