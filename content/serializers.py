@@ -10,7 +10,38 @@ from .models import (
     Attachment,
     Comment,
     AutomationLog,
+    DraftBatch,
 )
+
+
+class DraftBatchCreateSerializer(serializers.ModelSerializer):
+    chapter_id = serializers.IntegerField(write_only=True)
+    lesson_ids = serializers.ListField(
+        child=serializers.IntegerField(), write_only=True
+    )
+
+    class Meta:
+        model = DraftBatch
+        fields = ('token', 'chapter_id', 'lesson_ids', 'posts')
+
+    def create(self, validated_data):
+        lesson_ids = validated_data.pop('lesson_ids')
+        draft_batch = DraftBatch.objects.create(**validated_data)
+        draft_batch.lessons.set(lesson_ids)
+        return draft_batch
+
+class DraftBatchApproveSerializer(serializers.Serializer):
+    token = serializers.CharField()
+
+class DraftBatchReviseSerializer(serializers.Serializer):
+    token = serializers.CharField()
+    feedback = serializers.CharField()
+
+class AutomationLogCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AutomationLog
+        fields = ('token', 'status', 'message')
+
 
 class CampaignSerializer(serializers.ModelSerializer):
     class Meta:

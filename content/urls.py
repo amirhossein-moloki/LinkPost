@@ -11,6 +11,9 @@ from .views import (
     AttachmentViewSet,
     CommentViewSet,
     AutomationLogViewSet,
+    DraftBatchCreateView,
+    DraftBatchApproveView,
+    DraftBatchReviseView,
 )
 
 router = DefaultRouter()
@@ -27,4 +30,7 @@ router.register(r'automation-logs', AutomationLogViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('drafts/', DraftBatchCreateView.as_view(), name='draft-batch-create'),
+    path('approve/', DraftBatchApproveView.as_view(), name='draft-batch-approve'),
+    path('revise/', DraftBatchReviseView.as_view(), name='draft-batch-revise'),
 ]
