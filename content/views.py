@@ -75,6 +75,9 @@ class DraftBatchApproveView(views.APIView):
             draft_batch.chapter.processed = True
             draft_batch.chapter.save()
 
+        from .utils import notify_n8n
+        notify_n8n(draft_batch, event="approved")
+
         return Response({'status': 'approved'}, status=status.HTTP_200_OK)
 
 
@@ -94,6 +97,9 @@ class DraftBatchReviseView(views.APIView):
         draft_batch.status = 'revised'
         draft_batch.feedback = feedback
         draft_batch.save()
+
+        from .utils import notify_n8n
+        notify_n8n(draft_batch, event="revised")
 
         return Response({'status': 'revised'}, status=status.HTTP_200_OK)
 

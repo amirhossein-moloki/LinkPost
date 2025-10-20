@@ -3,3 +3,4 @@ djangorestframework
 django-unfold
 drf-yasg
 Faker
+requests
