@@ -1,0 +1,33 @@
+{
+  "current_task_id": 1,
+  "tasks": [
+    {
+      "id": 1,
+      "name": "lint",
+      "status": "pending",
+      "logs": null,
+      "artifacts": []
+    },
+    {
+      "id": 2,
+      "name": "test",
+      "status": "pending",
+      "logs": null,
+      "artifacts": []
+    },
+    {
+      "id": 3,
+      "name": "security",
+      "status": "pending",
+      "logs": null,
+      "artifacts": []
+    },
+    {
+      "id": 4,
+      "name": "build",
+      "status": "pending",
+      "logs": null,
+      "artifacts": []
+    }
+  ]
+}

@@ -24,7 +24,10 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install -r requirements.txt
+          pip install ruff pip-audit
 
-      - name: Static analysis
-        run: python -m compileall .
+      - name: Run CI tasks
+        run: |
+          chmod +x .ci/task-runner.sh
+          .ci/task-runner.sh
